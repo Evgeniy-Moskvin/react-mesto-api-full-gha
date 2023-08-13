@@ -16,6 +16,7 @@ class Auth {
     return fetch(`${this.url}/signup`, {
       method: 'POST',
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         password: userPassword,
         email: userEmail,
@@ -28,11 +29,20 @@ class Auth {
     return fetch(`${this.url}/signin`, {
       method: 'POST',
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         password: userPassword,
         email: userEmail,
       })
     }).then(this._gerResponseJson);
+  }
+
+  signOut() {
+    return fetch( `${this.url}/signin`, {
+      method: 'POST',
+      headers: this.headers,
+      credentials: 'include',
+    });
   }
 
   tokenCheck(token) {
@@ -41,8 +51,9 @@ class Auth {
       headers: {
         'Content-Type': 'application/json',
         //Authorization: `Bearer ${token}`,
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        //Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
+      credentials: 'include',
     }).then(this._gerResponseJson);
   }
 

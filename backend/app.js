@@ -22,7 +22,10 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
     console.error('Ошибка подключения к БД!');
   });
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3001'],
+  credentials: true,
+}));
 app.use(cookieParser());
 app.use(express.json());
 

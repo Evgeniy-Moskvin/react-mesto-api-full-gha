@@ -44,7 +44,7 @@ function App() {
         setCurrentUser(dataUser);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [loggedIn]);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -155,9 +155,10 @@ function App() {
     return auth
       .signIn(userEmail, userPassword)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem('jwt', res.token);
-        }
+        localStorage.setItem('userEmail', userEmail);
+        // if (res.token) {
+        //   localStorage.setItem('userEmail', userEmail);
+        // }
         setLoggedIn(true);
         setUserData({
           email: userEmail,
@@ -185,24 +186,34 @@ function App() {
   }
 
   const handleLogOut = () => {
-    setUserData({
-      email: '',
-    });
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    navigate('/sign-in');
+    return auth
+      .signOut()
+      .then((res) => {
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.removeItem('userEmail');
+        navigate('/sign-in');
+      })
+      .catch((err) => console.error(err));
+    // setUserData({
+    //   email: '',
+    // });
+    // localStorage.removeItem('userEmail');
+    // setLoggedIn(false);
+    // navigate('/sign-in');
   };
 
   const tokenCheck = () => {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
+    if (localStorage.getItem('userEmail')) {
+      //const userEmail = localStorage.getItem('userEmail');
       auth
-        .tokenCheck(jwt)
+        //.tokenCheck(userEmail)
+        .tokenCheck()
         .then((res) => {
           if (res) {
-            setUserData({
-              email: res.email,
-            });
+            // setUserData({
+            //   email: res.email,
+            // });
             setLoggedIn(true);
             navigate('/', { replace: true });
           }

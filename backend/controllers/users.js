@@ -108,13 +108,13 @@ const login = ((req, res, next) => {
     .then((user) => {
       const token = createToken(user);
 
-      /*return res.cookie('jwt', token, {
+      return res.cookie('jwt', token, {
         maxAge: 3600 * 24 * 7,
         httpOnly: true,
         sameSite: true,
-      }).send({ message: 'success' });*/
+      }).send({ message: 'success' });
 
-      return res.send({ token }).status(200);
+      //return res.send({ token }).status(200);
     })
     .catch(next);
 });

@@ -15,6 +15,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
+      credentials: 'include',
     })
       .then(res => this._gerResponseJson(res));
   }
@@ -22,6 +23,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this.url}/cards`, {
       headers: this.headers,
+      credentials: 'include',
     })
       .then(res => this._gerResponseJson(res));
   }
@@ -30,6 +32,7 @@ class Api {
     return fetch(`${this.url}/users/me`, {
       method: 'PATCH',
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         about: about
@@ -42,6 +45,7 @@ class Api {
     return fetch(`${this.url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: image
       })
@@ -53,6 +57,7 @@ class Api {
     return fetch(`${this.url}/cards`, {
       method: 'POST',
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         link: link
@@ -64,7 +69,8 @@ class Api {
   removeCard(id) {
     return fetch(`${this.url}/cards/${id}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
       .then(res => this._gerResponseJson(res));
   }
@@ -73,6 +79,7 @@ class Api {
     return fetch(`${this.url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this.headers,
+      credentials: 'include',
     })
       .then(res => this._gerResponseJson(res));
   }
@@ -81,6 +88,7 @@ class Api {
     return fetch(`${this.url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this.headers,
+      credentials: 'include',
     })
       .then(res => this._gerResponseJson(res));
   }
@@ -90,12 +98,14 @@ class Api {
       return fetch(`${this.url}/cards/${id}/likes`, {
         method: 'DELETE',
         headers: this.headers,
+        credentials: 'include',
       })
         .then(res => this._gerResponseJson(res));
     } else {
       return fetch(`${this.url}/cards/${id}/likes`, {
         method: 'PUT',
         headers: this.headers,
+        credentials: 'include',
       })
         .then(res => this._gerResponseJson(res));
     }
@@ -107,7 +117,7 @@ export const api = new Api({
   baseUrl: 'http://localhost:3000',
   headers: {
     //authorization: '36a9c581-3788-4f01-b44e-c367122bb1fa',
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    //authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });
