@@ -113,8 +113,6 @@ const login = ((req, res, next) => {
         httpOnly: true,
         sameSite: true,
       }).send({ message: 'success' });
-
-      //return res.send({ token }).status(200);
     })
     .catch(next);
 });
