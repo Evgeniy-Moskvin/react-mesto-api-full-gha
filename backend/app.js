@@ -3,9 +3,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 const { serverError } = require('./middlewares/serverError');
 
 const { PORT = 3000 } = process.env;
@@ -21,6 +22,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
     console.error('Ошибка подключения к БД!');
   });
 
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
