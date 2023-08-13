@@ -125,7 +125,7 @@ const getUser = ((req, res, next) => {
       if (!user) {
         throw new NotFound(`Пользователь с id ${res.user._id} не найден`);
       }
-      res.status(STATUS_CODE_OK).send({ user });
+      res.status(STATUS_CODE_OK).send(user);
     })
     .catch(next);
 });

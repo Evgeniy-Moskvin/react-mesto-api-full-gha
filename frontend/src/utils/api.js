@@ -107,6 +107,7 @@ export const api = new Api({
   baseUrl: 'http://localhost:3000',
   headers: {
     //authorization: '36a9c581-3788-4f01-b44e-c367122bb1fa',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });

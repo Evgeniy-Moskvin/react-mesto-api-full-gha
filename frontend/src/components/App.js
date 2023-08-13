@@ -43,7 +43,7 @@ function App() {
         handleCardsChange(dataCards);
         setCurrentUser(dataUser);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }, []);
 
   const handleEditAvatarClick = () => {
@@ -72,14 +72,15 @@ function App() {
 
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    //const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(id => id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   const handleCardDelete = (card) => {
@@ -89,7 +90,7 @@ function App() {
           state.filter((c) => !(c._id === card._id))
         );
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   const handleUpdateUser = ({ name, about }) => {
@@ -98,7 +99,7 @@ function App() {
         setCurrentUser(data);
         closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   const handleUpdateAvatar = (avatar) => {
@@ -108,7 +109,7 @@ function App() {
         setCurrentUser(data);
         closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   const handleAddPlaceSubmit = ({ name, link }) => {
@@ -117,7 +118,7 @@ function App() {
         setCards([data, ...cards]);
         closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
 
@@ -137,7 +138,7 @@ function App() {
         setIsInfoTooltipPopupOpen(true);*/
       })
       .catch((err) => {
-        setIsRegistrationSuccess(false)
+        setIsRegistrationSuccess(false);
         console.error(err);
       });
   };
@@ -154,7 +155,6 @@ function App() {
     return auth
       .signIn(userEmail, userPassword)
       .then((res) => {
-        console.log(res.token);
         if (res.token) {
           localStorage.setItem('jwt', res.token);
         }
@@ -201,13 +201,13 @@ function App() {
         .then((res) => {
           if (res) {
             setUserData({
-              email: res.data.email,
+              email: res.email,
             });
             setLoggedIn(true);
             navigate('/', { replace: true });
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   }
 

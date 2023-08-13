@@ -5,8 +5,10 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  const isOwn = currentUser._id === card.owner._id;
-  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  //const isOwn = currentUser._id === card.owner._id;
+  const isOwn = currentUser._id === card.owner;
+  //const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const isLiked = card.likes.some(id => id === currentUser._id);
 
   function handleClick() {
     onCardClick({ link: card.link, name: card.name });

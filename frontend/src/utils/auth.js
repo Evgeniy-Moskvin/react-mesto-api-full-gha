@@ -40,7 +40,8 @@ class Auth {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        //Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._gerResponseJson);
   }

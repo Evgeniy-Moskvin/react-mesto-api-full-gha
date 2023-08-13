@@ -5,7 +5,15 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const auth = (req, res, next) => {
   //const token = req.cookies.jwt;
-  const token = req.headers.authorization;
+  const { authorization } = req.headers;
+
+  if (!authorization.startsWith('Bearer')) {
+    next(new UnAuthorized('Необходима авторизация!'));
+    return;
+  }
+
+  const token = authorization.split('Bearer ')[1];
+
   let payload;
 
   if (!token) {
