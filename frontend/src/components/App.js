@@ -126,14 +126,20 @@ function App() {
     return auth
       .signUp(userEmail, userPassword)
       .then((res) => {
-        if (res.ok) {
+        setIsRegistrationSuccess(true);
+        setIsInfoTooltipPopupOpen(true);
+
+        /*if (res.ok) {
           setIsRegistrationSuccess(true);
         } else {
           setIsRegistrationSuccess(false);
         }
-        setIsInfoTooltipPopupOpen(true);
+        setIsInfoTooltipPopupOpen(true);*/
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        setIsRegistrationSuccess(false)
+        console.error(err);
+      });
   };
 
   const closePopupRegistration = () => {
@@ -148,8 +154,16 @@ function App() {
     return auth
       .signIn(userEmail, userPassword)
       .then((res) => {
-
-        if (res.ok) {
+        console.log(res.token);
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+        }
+        setLoggedIn(true);
+        setUserData({
+          email: userEmail,
+        })
+        navigate('/', {replace: true});
+        /*if (res.ok) {
           res.json().then((data) => {
             if (data.token) {
               localStorage.setItem('jwt', data.token);
@@ -162,9 +176,12 @@ function App() {
           navigate('/', {replace: true});
         } else {
           setIsInfoTooltipPopupOpen(true);
-        }
+        }*/
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        setIsInfoTooltipPopupOpen(true);
+        console.error(err)
+      });
   }
 
   const handleLogOut = () => {
