@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.25.148
+IP 51.250.25.148
 
 Frontend https://mesto.emoskvin.nomoreparties.co
 

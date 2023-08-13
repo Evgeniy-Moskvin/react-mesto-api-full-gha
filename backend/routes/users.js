@@ -23,16 +23,6 @@ router.get('/users/:userId', auth, celebrate({
   }),
 }), getUserById);
 
-router.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(/(?:http|https):[/][/]((?:[\w-]+)(?:\.[\w-]+)+)(?:[\w.,@?^=%&amp;:[/]~+#-]*[\w@?^=%&amp;[/]~+#-])?/),
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), createUser);
-
 router.patch('/users/me', auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -46,11 +36,27 @@ router.patch('/users/me/avatar', auth, celebrate({
   }),
 }), updateUserAvatar);
 
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
+
+router.post('/signup', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+    avatar: Joi.string().pattern(/(?:http|https):[/][/]((?:[\w-]+)(?:\.[\w-]+)+)(?:[\w.,@?^=%&amp;:[/]~+#-]*[\w@?^=%&amp;[/]~+#-])?/),
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+}), createUser);
 
 module.exports = router;
