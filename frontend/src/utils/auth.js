@@ -61,7 +61,8 @@ class Auth {
 
 export const auth = new Auth({
   //baseUrl: 'https://auth.nomoreparties.co',
-  baseUrl: 'http://localhost:3000',
+  //baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.mesto.emoskvin.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json'
   }
