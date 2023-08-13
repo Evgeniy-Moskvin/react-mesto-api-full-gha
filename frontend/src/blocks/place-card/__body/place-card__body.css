@@ -1,0 +1,15 @@
+.place-card__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 28px 19px 26px 21px;
+}
+
+@media screen and (max-width: 640px) {
+  .place-card__body {
+    padding-top: 25px;
+    padding-bottom: 28px;
+  }
+}

@@ -1,0 +1,22 @@
+.places__item {
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 992px) {
+  .places__item:nth-child(odd) {
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .places__item {
+    justify-content: center;
+  }
+
+  .places__item:nth-child(odd) {
+    justify-content: center;
+  }
+}

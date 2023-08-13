@@ -1,0 +1,13 @@
+.button-delete {
+  display: block;
+  box-sizing: border-box;
+  width: 18px;
+  height: 19px;
+  padding: 0;
+
+  background: transparent url("../../images/trash-icon.svg") center no-repeat;
+  background-size: contain;
+  border: none;
+
+  cursor: pointer;
+}

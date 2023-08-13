@@ -1,0 +1,9 @@
+.login__link {
+  display: inline-block;
+  margin-top: 15px;
+
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: none;
+  color: #ffffff;
+}

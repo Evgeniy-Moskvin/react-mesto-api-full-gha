@@ -1,0 +1,8 @@
+.user-navigate__item {
+  margin: 0 24px 0 0;
+  padding: 0;
+}
+
+.user-navigate__item:last-child {
+  margin-right: 0;
+}

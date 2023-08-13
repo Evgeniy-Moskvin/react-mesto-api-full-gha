@@ -1,0 +1,11 @@
+.places {
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 992px) {
+  .places {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
